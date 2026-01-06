@@ -6,6 +6,7 @@ import Window from './components/Window'
 import Terminal from './components/Terminal'
 import FileExplorer from './components/FileExplorer'
 import Settings from './components/Settings'
+import Notepad from './components/Notepad'
 import { WindowState } from './types'
 
 function App() {
@@ -50,7 +51,9 @@ function App() {
     switch (type) {
       case 'terminal': return <Terminal />
       case 'explorer': return <FileExplorer />
+      case 'thispc': return <FileExplorer showThisPC />
       case 'settings': return <Settings />
+      case 'notepad': return <Notepad />
       default: return <div className="p-4">内容</div>
     }
   }

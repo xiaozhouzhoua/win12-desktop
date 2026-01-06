@@ -21,7 +21,7 @@ export default function Settings() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 
   return (
-    <div className="h-full bg-[#202020] flex">
+    <div className="h-full flex">
       {/* Sidebar */}
       <div className="w-72 p-4 border-r border-white/10">
         {/* Search */}

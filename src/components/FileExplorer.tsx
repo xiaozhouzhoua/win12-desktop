@@ -9,6 +9,7 @@ interface FileItem {
 
 const sidebarItems = [
   { icon: Home, label: '主页', path: 'home' },
+  { icon: HardDrive, label: '此电脑', path: 'thispc' },
   { icon: Download, label: '下载', path: 'downloads' },
   { icon: FileText, label: '文档', path: 'documents' },
   { icon: Image, label: '图片', path: 'pictures' },
@@ -58,14 +59,29 @@ const files: Record<string, FileItem[]> = {
   ],
 }
 
-export default function FileExplorer() {
-  const [currentPath, setCurrentPath] = useState('home')
-  const currentFiles = files[currentPath] || []
+const thisPCItems: FileItem[] = [
+  { name: '桌面', type: 'folder' },
+  { name: '文档', type: 'folder' },
+  { name: '下载', type: 'folder' },
+  { name: '图片', type: 'folder' },
+  { name: '音乐', type: 'folder' },
+  { name: '视频', type: 'folder' },
+  { name: '本地磁盘 (C:)', type: 'folder', icon: HardDrive },
+  { name: '本地磁盘 (D:)', type: 'folder', icon: HardDrive },
+]
+
+interface FileExplorerProps {
+  showThisPC?: boolean
+}
+
+export default function FileExplorer({ showThisPC }: FileExplorerProps) {
+  const [currentPath, setCurrentPath] = useState(showThisPC ? 'thispc' : 'home')
+  const currentFiles = currentPath === 'thispc' ? thisPCItems : (files[currentPath] || [])
 
   return (
-    <div className="h-full flex bg-[#202020]">
+    <div className="h-full flex">
       {/* Sidebar */}
-      <div className="w-52 bg-[#1a1a1a] border-r border-white/10 p-2">
+      <div className="w-52 bg-white/5 border-r border-white/10 p-2">
         {sidebarItems.map((item, i) => (
           <button
             key={i}
